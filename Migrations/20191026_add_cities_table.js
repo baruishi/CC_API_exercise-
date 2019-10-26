@@ -1,30 +1,28 @@
 exports.up = function(knex, Promise) {
-  // create the 'users' table with three columns
   return knex.schema.createTable("cities", t => {
-    t.increments("id") // auto-incrementing id column
-      .index(); // index this column
+    t.increments("id") 
+      .index();
 
-    t.integer("rank") // auto-incrementing id column
-      .index(); // index this column
+    t.integer("rank")
+      .index();
 
-    t.integer("in_region") // auto-incrementing id column
-      .index(); // index this column
+    t.integer("in_region")
+      .index();
 
-    t.string("city") // auto-incrementing id column
-      .index(); // index this column
+    t.string("city")
+      .index()
 
-    t.string("county") // auto-incrementing id column
-      .index(); // index this column
+    t.string("county")
+      .index();
 
-    t.string("region") // auto-incrementing id column
-      .index(); // index this column
+    t.string("region")
+      .index();
 
-    t.integer("population") // auto-incrementing id column
-      .index(); // index this column
+    t.integer("population")
+      .index();
   });
 };
 
 exports.down = function(knex, Promise) {
-  // undo this migration by destroying the 'users' table
   return knex.schema.dropTable("cities");
 };
