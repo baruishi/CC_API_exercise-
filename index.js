@@ -6,16 +6,105 @@ const knex = require("knex")(config.db);
 //const models = require("./models")(knex);
 
 //const apiRouter = require("./controllers")(models);
-const morgan = require("morgan");
-const bodyParser = require("body-parser");
+//const morgan = require("morgan");
+//const bodyParser = require("body-parser");
 const express = require("express");
-const root = require("./controllers");
+//const root = require("./controllers");
 
 //graph iQL
 const app = express();
 const graphqlHTTP = require("express-graphql");
-const schema = require("./controllers");
+
 const { buildSchema } = require("graphql");
+//const schema = require("./controllers");
+
+const schema = buildSchema(`
+  type cities {
+    city: String!
+    county: String!
+    region: String!
+    population: Int
+  }
+
+  type city {
+    city: String!
+    county: String!
+    region: String!
+    population: Int
+  }
+
+  input inputPopulation {
+    city: String!
+    population: Int!
+  }
+
+  input addCity {
+    city: String!
+    county: String!
+    region: String!
+    population: Int!
+  }
+  type Query {
+    cities: [cities]
+    city(city: String!): city
+    citiesByPopulation(population: Int!): [cities]
+  }
+  type Mutation {
+  addCity(input: addCity): String!
+  updatePopulationByCity(city: String!, population: Int!): String!
+  }
+`);
+
+const root = {
+  cities: () => {
+    return knex
+      .select("*")
+      .from("cities")
+      .then(cities => {
+        return cities;
+      });
+  },
+
+  city: input => {
+    const selectedCity = input.city;
+    return knex
+      .select("*")
+      .from("cities")
+      .where({ city: selectedCity })
+      .then(cities => {
+        const city = cities.pop();
+        return city;
+      });
+  },
+  addCity: input => {
+    const newObj = input.input;
+    return knex("cities")
+      .insert({
+        city: newObj.city,
+        county: newObj.county,
+        region: newObj.region,
+        population: newObj.population
+      })
+      .then(() => {
+        return `New city: ${newObj.city} added to database`;
+      });
+  },
+  /*citiesByPopulation: (input) => { //TODO figure out how to select a city with popualtion grater than specific number
+    const populationOfCities = input.ppulation
+  },*/
+  updatePopulationByCity: input => {
+    console.log("input", input);
+    console.log("input.population", input.population);
+    const selectedCity = input.city;
+    const newPopulation = input.population;
+    return knex(`cities`)
+      .where({ city: selectedCity })
+      .update({ population: newPopulation })
+      .then(() => {
+        return `Population of ${selectedCity} updated to ${newPopulation}`;
+      });
+  }
+};
 
 app.use(
   "/graphql",

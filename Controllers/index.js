@@ -4,9 +4,8 @@
 
 //const userRouter = require;
 
+/*
 const { buildSchema } = require("graphql");
-
-//TODO consider taking the rank & in region out from the table
 
 const schema = buildSchema(`
   type cities {
@@ -22,6 +21,12 @@ const schema = buildSchema(`
     region: String!
     population: Int
   }
+  
+  input inputPopulation {
+    city: String!
+    population: Int!
+  }
+  
   input addCity {
     city: String!
     county: String!
@@ -34,7 +39,7 @@ const schema = buildSchema(`
     citiesByPopulation(population: Int!): [cities]
   }
   type Mutation {
-    updatePopulationByCity(city: String!, population: Int): Int!
+    updatePopulationByCity(input: inputPopulation): [city]
   }
 
 `);
@@ -64,7 +69,11 @@ const root = {
   /*citiesByPopulation: (input) => { //TODO figure out how to select a city with popualtion grater than specific number
     const populationOfCities = input.ppulation
   },*/
+
+/*
   updatePopulationByCity: input => {
+
+    console.log("updatePopulationByCity");
     console.log(input);
     const selectedCity = input.city;
     const newPopulation = input.population;
@@ -82,13 +91,16 @@ const root = {
   }
 };
 
+
+module.exports = { schema, root };
+
+
+*/
+
 //const router = express.Router();
 
 //const userRouter = require("./user");
 //const channelRouter = require("./channel");
-
-module.exports = { schema, root };
-
 // module.exports = (models) => {
 //   router.use("/users", userRouter(models));
 //   router.use("/channels", channelRouter(models));
