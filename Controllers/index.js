@@ -1,9 +1,10 @@
-const express = require("./node_modules/express");
-const router = express.Router();
+//const express = require("./node_modules/express");
 
-const userRouter = require;
+//const router = express.Router();
 
-const { buildSchema } = require("./node_modules/graphql");
+//const userRouter = require;
+
+const { buildSchema } = require("graphql");
 
 //TODO consider taking the rank & in region out from the table
 
