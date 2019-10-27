@@ -6,7 +6,7 @@ This was created during my time as a student at [Code Chrysalis](https://www.cod
 
 <br>
 
-This API was craeted using on Postgres, GraphQL and Knex, written in JavaScript.
+This API was created using on Postgres, GraphQL and Knex, written in JavaScript.
 
 It represents a simple API with cities in the United Kingdom.
 County, Region and Population is stored for every city.
