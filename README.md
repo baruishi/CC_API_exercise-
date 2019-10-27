@@ -6,14 +6,15 @@ This was created during my time as a student at [Code Chrysalis](https://www.cod
 
 <br>
 
-This API was created using on Postgres, GraphQL and Knex, written in JavaScript.
+This API was created using Postgres, GraphQL and Knex, written in JavaScript.
 
 It represents a simple API with cities in the United Kingdom.
+
 County, Region and Population is stored for every city.
 
 <br>
 
-### Set-up
+### Set-up:
 
 ```
 
@@ -27,7 +28,7 @@ yarn start
 
 ### How to use this API:
 
-# Show all cities in the databe.
+# Show all cities in the databe:
 
 ```
 {
@@ -40,7 +41,7 @@ yarn start
 }
 ```
 
-# Show a chosen city.
+# Show a chosen city:
 
 ```
 {
@@ -53,7 +54,7 @@ yarn start
 }
 ```
 
-# Update a population of a chosen city.
+# Update a population of a chosen city:
 
 ```
 mutation {
@@ -61,7 +62,7 @@ mutation {
 }
 ```
 
-# Add a new city.
+# Add a new city:
 
 ```
 mutation {
@@ -74,7 +75,7 @@ mutation {
 }
 ```
 
-# Delete a chosen city.
+# Delete a chosen city:
 
 ```
 mutation {
